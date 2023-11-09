@@ -18,6 +18,7 @@ package org.apache.kafka.tools;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.security.SecureRandom;
 import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.Namespace;
@@ -277,7 +278,7 @@ public class TransactionalMessageCopier {
         });
 
         try {
-            Random random = new Random();
+            Random random = new SecureRandom();
             while (0 < remainingMessages.get()) {
                 System.out.println(statusAsJson(numMessagesProcessed.get(), remainingMessages.get(), transactionalId));
                 if (isShuttingDown.get())
