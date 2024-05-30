@@ -251,7 +251,7 @@ public abstract class TimestampConverter<R extends ConnectRecord<R>> implements 
             throw new ConfigException("Unknown timestamp type in TimestampConverter: " + type + ". Valid values are "
                     + Utils.join(VALID_TYPES, ", ") + ".");
         }
-        if (type.equals(TYPE_STRING) && formatPattern.trim().isEmpty()) {
+        if (TYPE_STRING.equals(type) && formatPattern.trim().isEmpty()) {
             throw new ConfigException("TimestampConverter requires format option to be specified when using string timestamps");
         }
         SimpleDateFormat format = null;

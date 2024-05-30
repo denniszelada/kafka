@@ -661,7 +661,7 @@ public class StreamThread extends Thread {
         final AtomicInteger assignmentErrorCode = new AtomicInteger();
         consumerConfigs.put(StreamsConfig.InternalConfig.ASSIGNMENT_ERROR_CODE, assignmentErrorCode);
         String originalReset = null;
-        if (!builder.latestResetTopicsPattern().pattern().equals("") || !builder.earliestResetTopicsPattern().pattern().equals("")) {
+        if (!"".equals(builder.latestResetTopicsPattern().pattern()) || !"".equals(builder.earliestResetTopicsPattern().pattern())) {
             originalReset = (String) consumerConfigs.get(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG);
             consumerConfigs.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "none");
         }
@@ -938,16 +938,16 @@ public class StreamThread extends Thread {
             } else if (builder.latestResetTopicsPattern().matcher(partition.topic()).matches()) {
                 addToResetList(partition, seekToEnd, "Setting topic '{}' to consume from {} offset", "latest", loggedTopics);
             } else {
-                if (originalReset == null || (!originalReset.equals("earliest") && !originalReset.equals("latest"))) {
+                if (originalReset == null || (!"earliest".equals(originalReset) && !"latest".equals(originalReset))) {
                     final String errorMessage = "No valid committed offset found for input topic %s (partition %s) and no valid reset policy configured." +
                         " You need to set configuration parameter \"auto.offset.reset\" or specify a topic specific reset " +
                         "policy via StreamsBuilder#stream(..., Consumed.with(Topology.AutoOffsetReset)) or StreamsBuilder#table(..., Consumed.with(Topology.AutoOffsetReset))";
                     throw new StreamsException(String.format(errorMessage, partition.topic(), partition.partition()), e);
                 }
 
-                if (originalReset.equals("earliest")) {
+                if ("earliest".equals(originalReset)) {
                     addToResetList(partition, seekToBeginning, "No custom setting defined for topic '{}' using original config '{}' for offset reset", "earliest", loggedTopics);
-                } else if (originalReset.equals("latest")) {
+                } else if ("latest".equals(originalReset)) {
                     addToResetList(partition, seekToEnd, "No custom setting defined for topic '{}' using original config '{}' for offset reset", "latest", loggedTopics);
                 }
             }

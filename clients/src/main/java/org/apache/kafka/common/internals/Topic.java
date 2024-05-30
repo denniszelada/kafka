@@ -36,7 +36,7 @@ public class Topic {
     public static void validate(String topic) {
         if (topic.isEmpty())
             throw new InvalidTopicException("Topic name is illegal, it can't be empty");
-        if (topic.equals(".") || topic.equals(".."))
+        if (".".equals(topic) || "..".equals(topic))
             throw new InvalidTopicException("Topic name cannot be \".\" or \"..\"");
         if (topic.length() > MAX_NAME_LENGTH)
             throw new InvalidTopicException("Topic name is illegal, it can't be longer than " + MAX_NAME_LENGTH +

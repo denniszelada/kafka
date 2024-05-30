@@ -45,7 +45,7 @@ public final class GraphGraceSearchUtil {
             }
         }
 
-        final String newChain = chain.equals("") ? streamsGraphNode.nodeName() : streamsGraphNode.nodeName() + "->" + chain;
+        final String newChain = "".equals(chain) ? streamsGraphNode.nodeName() : streamsGraphNode.nodeName() + "->" + chain;
 
         if (streamsGraphNode.parentNodes().isEmpty()) {
             // error base case: we traversed to the end of the graph without finding a window definition

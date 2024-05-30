@@ -56,7 +56,7 @@ public class ReflectionsUtil {
         public boolean matches(URL url) {
             final String protocol = url.getProtocol();
             final String externalForm = url.toExternalForm();
-            if (!protocol.equals(FILE_PROTOCOL)) {
+            if (!FILE_PROTOCOL.equals(protocol)) {
                 return false;
             }
             for (String ending : endings) {

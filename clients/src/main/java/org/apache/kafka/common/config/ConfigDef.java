@@ -638,9 +638,9 @@ public class ConfigDef {
             switch (type) {
                 case BOOLEAN:
                     if (value instanceof String) {
-                        if (trimmed.equalsIgnoreCase("true"))
+                        if ("true".equalsIgnoreCase(trimmed))
                             return true;
-                        else if (trimmed.equalsIgnoreCase("false"))
+                        else if ("false".equalsIgnoreCase(trimmed))
                             return false;
                         else
                             throw new ConfigException(name, value, "Expected value to be either true or false");

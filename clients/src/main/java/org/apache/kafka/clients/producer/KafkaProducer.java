@@ -563,7 +563,7 @@ public class KafkaProducer<K, V> implements Producer<K, V> {
 
     private static int parseAcks(String acksString) {
         try {
-            return acksString.trim().equalsIgnoreCase("all") ? -1 : Integer.parseInt(acksString.trim());
+            return "all".equalsIgnoreCase(acksString.trim()) ? -1 : Integer.parseInt(acksString.trim());
         } catch (NumberFormatException e) {
             throw new ConfigException("Invalid configuration value for 'acks': " + acksString);
         }
