@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.common.metrics;
 
+import java.security.SecureRandom;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -635,7 +636,7 @@ public class MetricsTest {
      */
     @Test
     public void testConcurrentReadUpdate() throws Exception {
-        final Random random = new Random();
+        final Random random = new SecureRandom();
         final Deque<Sensor> sensors = new ConcurrentLinkedDeque<>();
         metrics = new Metrics(new MockTime(10));
         SensorCreator sensorCreator = new SensorCreator(metrics);
@@ -705,7 +706,7 @@ public class MetricsTest {
         final Deque<Sensor> sensors = new ConcurrentLinkedDeque<>();
         SensorCreator sensorCreator = new SensorCreator(metrics);
 
-        final Random random = new Random();
+        final Random random = new SecureRandom();
         final AtomicBoolean alive = new AtomicBoolean(true);
         executorService = Executors.newFixedThreadPool(3);
 

@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.common.utils;
 
+import java.security.SecureRandom;
 import org.apache.kafka.test.TestUtils;
 import org.easymock.EasyMock;
 import org.easymock.IAnswer;
@@ -392,7 +393,7 @@ public class UtilsTest {
                                                           final StringBuilder expectedBufferContent,
                                                           final int bufferSize) throws IOException {
         final int step = 20;
-        final Random random = new Random();
+        final Random random = new SecureRandom();
         int remainingBytes = bufferSize;
         while (remainingBytes > 0) {
             final int mockedBytesRead = remainingBytes < step ? remainingBytes : random.nextInt(step);

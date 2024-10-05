@@ -17,6 +17,7 @@
 package org.apache.kafka.streams.perf;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.security.SecureRandom;
 import java.time.Duration;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -175,7 +176,7 @@ public class YahooBenchmark {
         maybeSetupPhaseEvents(eventsTopic, "simple-benchmark-produce-events", parent.numRecords, ads);
 
         final CountDownLatch latch = new CountDownLatch(1);
-        parent.setStreamProperties("simple-benchmark-yahoo" + new Random().nextInt());
+        parent.setStreamProperties("simple-benchmark-yahoo" + new SecureRandom().nextInt());
 
         final KafkaStreams streams = createYahooBenchmarkStreams(parent.props, campaignsTopic, eventsTopic, latch, parent.numRecords);
         parent.runGenericBenchmark(streams, "Streams Yahoo Performance [records/latency/rec-sec/MB-sec counted]: ", latch);
