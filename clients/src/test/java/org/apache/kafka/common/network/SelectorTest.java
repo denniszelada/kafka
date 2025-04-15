@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.common.network;
 
+import java.security.SecureRandom;
 import org.apache.kafka.common.KafkaException;
 import org.apache.kafka.common.MetricName;
 import org.apache.kafka.common.memory.MemoryPool;
@@ -540,7 +541,7 @@ public class SelectorTest {
     }
 
     protected byte[] randomPayload(int sizeBytes) throws Exception {
-        Random random = new Random();
+        Random random = new SecureRandom();
         byte[] payload = new byte[sizeBytes + 4];
         random.nextBytes(payload);
         ByteArrayOutputStream prefixOs = new ByteArrayOutputStream();

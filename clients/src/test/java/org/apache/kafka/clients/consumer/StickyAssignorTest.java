@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.clients.consumer;
 
+import java.security.SecureRandom;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -432,7 +433,7 @@ public class StickyAssignorTest {
 
     @Test
     public void testLargeAssignmentWithMultipleConsumersLeaving() {
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         int topicCount = 40;
         int consumerCount = 200;
 
@@ -498,7 +499,7 @@ public class StickyAssignorTest {
         final int maxNumTopics = 20;
 
         for (int round = 1; round <= 100; ++round) {
-            int numTopics = minNumTopics + new Random().nextInt(maxNumTopics - minNumTopics);
+            int numTopics = minNumTopics + new SecureRandom().nextInt(maxNumTopics - minNumTopics);
 
             ArrayList<String> topics = new ArrayList<>();
             for (int i = 0; i < numTopics; ++i)
@@ -508,7 +509,7 @@ public class StickyAssignorTest {
             for (int i = 0; i < numTopics; ++i)
                 partitionsPerTopic.put(getTopicName(i, maxNumTopics), i + 1);
 
-            int numConsumers = minNumConsumers + new Random().nextInt(maxNumConsumers - minNumConsumers);
+            int numConsumers = minNumConsumers + new SecureRandom().nextInt(maxNumConsumers - minNumConsumers);
 
             Map<String, Subscription> subscriptions = new HashMap<>();
             for (int i = 0; i < numConsumers; ++i) {
@@ -657,7 +658,7 @@ public class StickyAssignorTest {
     private static List<String> getRandomSublist(ArrayList<String> list) {
         List<String> selectedItems = new ArrayList<>(list);
         int len = list.size();
-        Random random = new Random();
+        Random random = new SecureRandom();
         int howManyToRemove = random.nextInt(len);
 
         for (int i = 1; i <= howManyToRemove; ++i)
