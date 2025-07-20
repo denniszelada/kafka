@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.test;
 
+import java.security.SecureRandom;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.Cluster;
@@ -71,7 +72,7 @@ public class TestUtils {
 
     /* A consistent random number generator to make tests repeatable */
     public static final Random SEEDED_RANDOM = new Random(192348092834L);
-    public static final Random RANDOM = new Random();
+    public static final Random RANDOM = new SecureRandom();
     public static final long DEFAULT_MAX_WAIT_MS = 15000;
 
     public static Cluster singletonCluster() {

@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.streams.kstream.internals;
 
+import java.security.SecureRandom;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.utils.Bytes;
@@ -403,7 +404,7 @@ public class KTableKTableLeftJoinTest {
             "T", "UU", "VVVVVVVVVVVVVVVVVVV"
         };
 
-        final Random random = new Random();
+        final Random random = new SecureRandom();
         for (int i = 0; i < 1000; i++) {
             for (final String input : inputs) {
                 final Long key = (long) random.nextInt(1000);

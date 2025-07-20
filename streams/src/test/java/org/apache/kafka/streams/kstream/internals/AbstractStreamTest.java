@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.streams.kstream.internals;
 
+import java.security.SecureRandom;
 import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -118,7 +119,7 @@ public class AbstractStreamTest {
         private Random rand;
 
         ExtendedKStreamDummy() {
-            rand = new Random();
+            rand = new SecureRandom();
         }
 
         @Override
