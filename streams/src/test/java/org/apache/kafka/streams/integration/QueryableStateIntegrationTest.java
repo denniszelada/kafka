@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.streams.integration;
 
+import io.github.pixee.security.BoundedLineReader;
 import kafka.utils.MockTime;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -153,7 +154,7 @@ public class QueryableStateIntegrationTest {
         final ClassLoader classLoader = getClass().getClassLoader();
         final String fileName = "QueryableStateIntegrationTest" + File.separator + "inputValues.txt";
         try (final BufferedReader reader = new BufferedReader(new FileReader(classLoader.getResource(fileName).getFile()))) {
-            for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+            for (String line = BoundedLineReader.readLine(reader, 5_000_000); line != null; line = BoundedLineReader.readLine(reader, 5_000_000)) {
                 input.add(line);
             }
         } catch (final Exception e) {
